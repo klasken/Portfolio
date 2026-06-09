@@ -1,16 +1,33 @@
-# React + Vite
+# 🌐 Mon Portfolio Personnel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bienvenue sur le dépôt GitHub de mon portfolio en ligne ! Ce projet présente mon parcours, mes compétences en développement logiciel et mes projets orientés vers l'Intelligence Artificielle et le Machine Learning.
 
-Currently, two official plugins are available:
+🔗 **Voir le site en direct :** [portfolio-ceugniet-marius.vercel.app](https://portfolio-ceugniet-marius.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 À propos de moi
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Actuellement étudiant à **Epitech Lille (Promo 2028)**, je me spécialise en **Développement Logiciel** avec un fort intérêt pour l'**Intelligence Artificielle** et le **Machine Learning**. Ce portfolio est ma vitrine pour partager mes créations, mon évolution technique et mes expérimentations avec le code.
 
-## Expanding the ESLint configuration
+## 🛠️ Technologies utilisées
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Ce site a été développé avec les outils suivants :
+- **Frontend :** [Ex: React.js / Next.js / HTML5 / CSS3]
+- **Styling :** [Ex: Tailwind CSS / SCSS]
+- **Déploiement :** [Vercel](https://vercel.com/)
+
+## 📂 Contenu du projet
+
+- 🧑‍💻 **Accueil / Présentation :** Une vue globale de mon profil et de mes objectifs.
+- 🎓 **Parcours :** Mon cursus à Epitech Lille et mes expériences.
+- 💻 **Projets :** Une sélection de mes meilleurs projets de programmation et d'IA (avec liens vers les dépôts GitHub associés).
+- ✉️ **Contact :** Mes réseaux (LinkedIn, etc.) pour me joindre facilement.
+
+## ⚙️ Installation locale
+
+Si vous souhaitez lancer ce projet sur votre machine :
+
+1. Cloner le dépôt :
+   ```bash
+   git clone [https://github.com/klasken/Portfolio.git](https://github.com/klasken/Portfolio.git)
