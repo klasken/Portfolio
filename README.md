@@ -30,4 +30,4 @@ Si vous souhaitez lancer ce projet sur votre machine :
 
 1. Cloner le dépôt :
    ```bash
-   git clone [https://github.com/klasken/Portfolio.git](https://github.com/klasken/Portfolio.git)
+git clone [https://github.com/klasken/Portfolio.git](https://github.com/klasken/Portfolio.git)
