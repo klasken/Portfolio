@@ -29,5 +29,21 @@ Ce site a été développé avec les outils suivants :
 Si vous souhaitez lancer ce projet sur votre machine :
 
 1. Cloner le dépôt :
-   ```bash
-   git clone [https://github.com/klasken/Portfolio.git]
+```bash
+   git clone https://github.com/klasken/Portfolio.git
+```
+
+2. Accéder au dossier :
+```bash
+   cd Portfolio
+```
+
+3. Installer les dépendances :
+```bash
+   npm install
+```
+
+4. Lancer le projet en local :
+```bash
+   npm run dev
+```
