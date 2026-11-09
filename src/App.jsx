@@ -12,11 +12,13 @@ import { useEffect, useId, useState } from "react";
 /* Contenu                                                                     */
 /* -------------------------------------------------------------------------- */
 
-// Fichiers à placer dans le dossier public/ du projet :
+// Fichiers à placer dans le dossier public/ du projet (noms exacts, sans espace) :
 //   public/photo-marius.jpg
 //   public/CV_Marius_Ceugniet.pdf
+//   public/projets/  (captures des projets)
 const PHOTO_URL = "/photo-marius.jpg";
 const CV_URL = "/CV_Marius_Ceugniet.pdf";
+const CV_NOM = "CV_Marius_Ceugniet.pdf"; // nom du fichier quand on le télécharge
 
 const PROFIL = {
   prenom: "Marius",
@@ -370,11 +372,21 @@ function Navbar() {
               {l.label}
             </a>
           ))}
+          <a href={CV_URL} download={CV_NOM} className="nav-cv">
+            <IcTelecharger className="ic ic-4" />
+            Mon CV
+          </a>
           <a href="#contact" className="nav-cta">
             <IcSend className="ic ic-4" />
             Me contacter
           </a>
         </div>
+
+        {/* Sur téléphone, le bouton CV reste visible à côté du menu burger. */}
+        <a href={CV_URL} download={CV_NOM} className="nav-cv nav-cv--mobile">
+          <IcTelecharger className="ic ic-4" />
+          Mon CV
+        </a>
 
         <button
           type="button"
@@ -1158,7 +1170,7 @@ function Contact() {
                 <strong>Mon CV</strong>
                 <span>PDF, une page</span>
               </div>
-              <a className="btn btn-plein btn-petit" href={CV_URL} download>
+              <a className="btn btn-plein btn-petit" href={CV_URL} download={CV_NOM}>
                 <IcTelecharger className="ic ic-4" />
                 Télécharger
               </a>
@@ -1393,6 +1405,13 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   background: var(--ink); color: var(--night); font-size: .92rem; font-weight: 600; text-decoration: none;
 }
 .nav-liens > a.nav-cta:hover { background: #e9e6ff; }
+.nav-cv, .nav-liens > a.nav-cv, .nav-liens > a.nav-cv:hover {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .95rem .45rem .75rem; border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.28); color: var(--ink); font-size: .92rem; font-weight: 600; text-decoration: none;
+  transition: background-color .15s, border-color .15s;
+}
+.nav-cv:hover, .nav-liens > a.nav-cv:hover { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.5); }
+.nav-cv--mobile { margin-left: auto; margin-right: .75rem; padding-block: .4rem; font-size: .85rem; }
 .nav-burger { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; margin-right: -.5rem; border-radius: 999px; color: var(--ink); }
 .menu-mobile { border-top: 1px solid var(--line); padding: .5rem 1.25rem 1.5rem; }
 .menu-mobile li a { display: block; padding-block: 1rem; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 1.125rem; color: var(--ink); }
@@ -1581,7 +1600,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .bloc { padding-block: 8rem; }
   .nav-int { height: 4.5rem; }
   .nav-liens { display: flex; }
-  .nav-burger, .menu-mobile { display: none; }
+  .nav-burger, .menu-mobile, .nav-cv--mobile { display: none; }
   .wordmark-grand { font-size: 1.4rem; }
   .hero { padding: 8.5rem 0 7rem; }
   .hero-titre-petit { font-size: 1rem; }
