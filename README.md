@@ -23,16 +23,20 @@ Ce portfolio est ma vitrine pour partager mes créations, mon évolution techniq
 Pour développer et mettre en ligne ce site, j'ai utilisé :
 - **Frontend :** React.js propulsé par Vite
 - **Langages et Stylisme :** JavaScript, HTML5, CSS3
+- **Polices :** Unbounded et IBM Plex, auto-hébergées via Fontsource
 - **Déploiement :** [Vercel](https://vercel.com/)
 
 ## 📂 Contenu du projet
 
 Le site est structuré en plusieurs sections :
-- 🧑‍💻 **Accueil / Présentation :** Une vue globale de mon profil et de ma recherche actuelle (stage d'un mois en juin/juillet 2026).
-- 💻 **Projets & Réflexion :** Une sélection de mes projets (Etodo, YOML, Hack And Juice, Chatbot & LLM) avec un retour sur mes défis et apprentissages.
-- 📈 **Évolution :** Mon développement technique et mes activités au sein du Hub Epitech.
-- 🎓 **Expériences & Formation :** Mon cursus académique, mes compétences et mes expériences professionnelles.
-- ✉️ **Contact :** Mes réseaux (LinkedIn, GitHub), mon CV téléchargeable et un formulaire pour me joindre directement.
+- 🧑‍💻 **Accueil :** présentation, recherche de stage en cours et une petite scène d'alunissage animée (clin d'œil au projet Start Trek).
+- 💻 **Projets :** 11 projets filtrables (IA & data, Web, Sécurité, Jeu) : Start Trek, Codename, Persona, Dr CVRIE, Tardis, Etodo, Chatbot & LLM, Hack And Juice, YOML, Puissance 4 et ce portfolio. Chaque projet se déplie pour montrer le défi, ce que j'ai fait et la stack.
+- 📈 **Ce que j'ai appris :** mon évolution technique et mes activités au Hub Epitech.
+- 🎓 **Parcours :** formation et expériences professionnelles sous forme de frise.
+- 🛠️ **Compétences :** IA & data, web, outils, langues et centres d'intérêt.
+- ✉️ **Contact :** email, LinkedIn, GitHub, CV téléchargeable et formulaire qui prépare un email.
+
+✏️ **Tout le contenu se modifie dans `src/data.js`**, sans toucher au reste du code.
 
 ## ⚙️ Installation locale
 
