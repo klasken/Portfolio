@@ -117,12 +117,16 @@ const PROJETS = [
   },
   {
     id: "chatbot",
-    nom: "Chatbot & LLM",
+    nom: "MealMatch",
     domaine: "ia",
     couleur: C.magenta,
-    description: "Conception et déploiement d'une IA conversationnelle.",
-    stack: ["LLM"],
+    description:
+      "Un chatbot Discord qui repère les ingrédients cités dans un message et propose les recettes les plus adaptées.",
+    stack: ["Python", "Discord", "API REST"],
     lien: PROFIL.github,
+    // Capture de la vraie page d'accueil du projet (projet Eliza, nom d'origine Fit-Chef).
+    image: "/projets/assistant-culinaire.webp",
+    alt: "Page d'accueil du projet, avec les boutons pour rejoindre le serveur Discord et inviter le bot",
   },
   {
     id: "etodo",
