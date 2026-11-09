@@ -64,7 +64,10 @@ const PROJETS = [
     description:
       "Un agent LLM durci contre l'injection de prompt. J'ai conçu et testé 5 attaques pour vérifier qu'il garde ses consignes.",
     stack: ["Ollama", "LLM"],
-    lien: PROFIL.github,
+    lien: "https://github.com/klasken/Codename",
+    // Capture du vrai fichier Modelfile du dépôt (lignes 53 à 62).
+    image: "/projets/codename.webp",
+    alt: "Extrait du Modelfile de Codename : des tentatives d'injection de prompt et la réponse « Accès refusé. »",
   },
   {
     id: "job-aggregator",
@@ -73,7 +76,9 @@ const PROJETS = [
     couleur: C.magenta,
     description: "Agrégateur d'offres d'emploi avec API, authentification JWT et matching par IA.",
     stack: ["FastAPI", "MySQL", "Docker"],
-    lien: PROFIL.github,
+    lien: "https://github.com/klasken/Jobaggregator",
+    image: "/projets/jobaggregator.webp",
+    alt: "L'application Joby Find en mode sombre : liste d'offres et recommandation IA avec le taux de correspondance",
   },
   {
     id: "tardis",
@@ -104,7 +109,11 @@ const PROJETS = [
     couleur: C.orange,
     description: "Recherche et exploitation de failles d'une application web vulnérable.",
     stack: ["OWASP Juice Shop"],
-    lien: PROFIL.github,
+    lien: "https://github.com/klasken/Hack_And_Juice",
+    // Capture officielle d'OWASP Juice Shop (licence MIT, © Bjoern Kimminich et contributeurs) :
+    // les challenges Login Jim et Login Bender, deux des 15 résolus dans le projet.
+    image: "/projets/hackandjuice.webp",
+    alt: "OWASP Juice Shop avec les challenges Login Jim et Login Bender résolus",
   },
   {
     id: "chatbot",
