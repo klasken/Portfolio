@@ -1,13 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-// Polices auto-hébergées (pas d'appel à Google Fonts : plus rapide et plus simple côté RGPD)
-import '@fontsource/unbounded/latin-500.css'
-import '@fontsource/unbounded/latin-600.css'
-import '@fontsource/ibm-plex-sans/latin-400.css'
-import '@fontsource/ibm-plex-sans/latin-500.css'
-import '@fontsource/ibm-plex-sans/latin-600.css'
-import '@fontsource/ibm-plex-mono/latin-400.css'
+// Polices auto-hébergées : servies par le site lui-même, aucun appel à Google Fonts
+// (l'adresse IP des visiteurs n'est pas transmise à Google, ce qui évite un souci RGPD).
+import '@fontsource-variable/unbounded'
+import '@fontsource-variable/hanken-grotesk'
 
 import './index.css'
 import App from './App.jsx'

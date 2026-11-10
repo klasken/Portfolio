@@ -1233,6 +1233,171 @@ function Contact() {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Mentions légales et confidentialité                                         */
+/* -------------------------------------------------------------------------- */
+
+// Ancres qui affichent la page légale à la place du portfolio.
+const ANCRES_LEGALES = ["#mentions-legales", "#confidentialite"];
+const MAJ_LEGALE = "10 novembre 2026"; // à changer si tu modifies le contenu ci-dessous
+
+// Hébergeur du site (obligatoire dans les mentions légales, art. 1-1 LCEN).
+// Si tu changes d'hébergeur (Netlify, OVH...), mets ces infos à jour.
+const HEBERGEUR = {
+  nom: "Vercel Inc.",
+  adresse: "440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis",
+  telephone: "+1 951 383 6898",
+  site: "https://vercel.com",
+  confidentialite: "https://vercel.com/legal/privacy-policy",
+};
+
+function PageLegale() {
+  const nomComplet = `${PROFIL.prenom} ${PROFIL.nom}`;
+  const mail = (
+    <a className="lien-souligne" href={`mailto:${PROFIL.email}`}>
+      {PROFIL.email}
+    </a>
+  );
+
+  return (
+    <main id="contenu-legal" className="legal">
+      <div className="wrap legal-int">
+        <a href="#top" className="legal-retour">
+          ← Retour au portfolio
+        </a>
+
+        <h1 className="titre titre-grand">Mentions légales</h1>
+        <p className="legal-maj">Dernière mise à jour : {MAJ_LEGALE}</p>
+
+        <section aria-labelledby="ml-editeur">
+          <h2 id="ml-editeur">Éditeur du site</h2>
+          <p>
+            Ce site est le portfolio personnel de <strong>{nomComplet}</strong>, particulier, édité à titre non
+            professionnel et sans but commercial.
+          </p>
+          <p>Contact : {mail}</p>
+          <p>
+            Directeur de la publication : <strong>{nomComplet}</strong>.
+          </p>
+        </section>
+
+        <section aria-labelledby="ml-hebergeur">
+          <h2 id="ml-hebergeur">Hébergement</h2>
+          <p>
+            <strong>{HEBERGEUR.nom}</strong>
+            <br />
+            {HEBERGEUR.adresse}
+            <br />
+            Téléphone : {HEBERGEUR.telephone}
+            <br />
+            <a className="lien-souligne" href={HEBERGEUR.site} target="_blank" rel="noopener noreferrer">
+              {HEBERGEUR.site.replace("https://", "")}
+            </a>
+          </p>
+        </section>
+
+        <section aria-labelledby="ml-pi">
+          <h2 id="ml-pi">Propriété intellectuelle</h2>
+          <p>
+            Les textes, illustrations, captures d'écran et le code de ce site sont la propriété de {nomComplet}, sauf
+            mention contraire. Toute reproduction, totale ou partielle, sans autorisation écrite préalable est
+            interdite. Le code source de certains projets présentés est publié sur GitHub sous sa propre licence.
+          </p>
+          <p>
+            Les polices Unbounded et Hanken Grotesk sont distribuées sous licence SIL Open Font License 1.1. Les noms
+            et marques cités (Epitech, GitHub, LinkedIn, etc.) appartiennent à leurs propriétaires respectifs.
+          </p>
+        </section>
+
+        <section aria-labelledby="ml-liens">
+          <h2 id="ml-liens">Liens externes</h2>
+          <p>
+            Ce site contient des liens vers d'autres sites (GitHub, LinkedIn, démos de projets). Je n'ai aucun contrôle
+            sur leur contenu et ne peux pas en être tenu responsable. Ces sites ont leurs propres règles de
+            confidentialité.
+          </p>
+        </section>
+
+        <h1 id="confidentialite" className="titre titre-grand legal-titre-2">
+          Confidentialité et données personnelles
+        </h1>
+
+        <section aria-labelledby="pc-resume">
+          <h2 id="pc-resume">En bref</h2>
+          <ul className="legal-liste">
+            <li>Aucun cookie, aucun traceur publicitaire, aucun outil de mesure d'audience.</li>
+            <li>Aucun formulaire : je ne collecte rien sur ce site.</li>
+            <li>Les polices et fichiers sont servis par le site lui-même, sans appel à Google ou à un autre tiers.</li>
+            <li>Si vous m'écrivez par e-mail, j'utilise votre message uniquement pour vous répondre.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="pc-responsable">
+          <h2 id="pc-responsable">Responsable du traitement</h2>
+          <p>
+            {nomComplet}, joignable à l'adresse {mail}.
+          </p>
+        </section>
+
+        <section aria-labelledby="pc-donnees">
+          <h2 id="pc-donnees">Données traitées</h2>
+          <h3>Journaux techniques de l'hébergeur</h3>
+          <p>
+            Comme pour tout site web, l'hébergeur {HEBERGEUR.nom} enregistre automatiquement des données techniques
+            lors de votre visite (adresse IP, type de navigateur, page demandée, date et heure). Ces données servent
+            uniquement à faire fonctionner le site et à le protéger contre les abus (intérêt légitime, article 6.1.f
+            du RGPD). Je ne les exploite pas. Elles sont conservées par {HEBERGEUR.nom} selon sa{" "}
+            <a className="lien-souligne" href={HEBERGEUR.confidentialite} target="_blank" rel="noopener noreferrer">
+              politique de confidentialité
+            </a>
+            .
+          </p>
+          <p>
+            {HEBERGEUR.nom} étant établi aux États-Unis, ces données peuvent y être transférées. Ce transfert est
+            encadré par le Data Privacy Framework UE–États-Unis, auquel {HEBERGEUR.nom} est certifié.
+          </p>
+
+          <h3>E-mails que vous m'envoyez</h3>
+          <p>
+            Si vous me contactez par e-mail, je reçois votre adresse et le contenu de votre message. Je les utilise
+            uniquement pour vous répondre et échanger avec vous, par exemple au sujet d'un stage ou d'un projet
+            (intérêt légitime). Ces messages sont stockés dans ma messagerie (Gmail, fournie par Google) et supprimés
+            au plus tard 2 ans après notre dernier échange. Ils ne sont jamais revendus ni transmis à des tiers.
+          </p>
+        </section>
+
+        <section aria-labelledby="pc-cookies">
+          <h2 id="pc-cookies">Cookies</h2>
+          <p>
+            Ce site ne dépose aucun cookie et n'utilise aucun traceur. C'est pour cela qu'aucun bandeau de
+            consentement ne s'affiche.
+          </p>
+        </section>
+
+        <section aria-labelledby="pc-droits">
+          <h2 id="pc-droits">Vos droits</h2>
+          <p>
+            Conformément au RGPD et à la loi Informatique et Libertés, vous pouvez demander l'accès, la rectification
+            ou l'effacement de vos données, vous opposer à leur traitement ou en demander la limitation. Écrivez-moi
+            à {mail}, je réponds sous un mois.
+          </p>
+          <p>
+            Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (
+            <a className="lien-souligne" href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">
+              cnil.fr/fr/plaintes
+            </a>
+            ).
+          </p>
+        </section>
+
+        <a href="#top" className="btn btn-contour legal-bas">
+          ← Retour au portfolio
+        </a>
+      </div>
+    </main>
+  );
+}
+
 function Footer() {
   return (
     <footer className="footer">
@@ -1249,6 +1414,8 @@ function Footer() {
             GitHub
           </a>
           <a href={`mailto:${PROFIL.email}`}>{PROFIL.email}</a>
+          <a href="#mentions-legales">Mentions légales</a>
+          <a href="#confidentialite">Confidentialité</a>
           <span>© 2026 {PROFIL.prenom} {PROFIL.nom}</span>
         </div>
       </div>
@@ -1261,38 +1428,46 @@ function Footer() {
 /* -------------------------------------------------------------------------- */
 
 export default function App() {
+  // Les polices sont auto-hébergées (voir main.jsx) : plus aucun appel à Google Fonts.
+  const [hash, setHash] = useState(() => window.location.hash);
+  const pageLegale = ANCRES_LEGALES.includes(hash);
+
   useEffect(() => {
-    document.title = `${PROFIL.prenom} ${PROFIL.nom}, développeur IA & web`;
-    document.documentElement.lang = "fr";
-    if (!document.getElementById("polices-portfolio")) {
-      const pre = document.createElement("link");
-      pre.rel = "preconnect";
-      pre.href = "https://fonts.gstatic.com";
-      pre.crossOrigin = "anonymous";
-      const lien = document.createElement("link");
-      lien.id = "polices-portfolio";
-      lien.rel = "stylesheet";
-      lien.href =
-        "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300..800&family=Unbounded:wght@300..900&display=swap";
-      document.head.append(pre, lien);
-    }
+    const onHash = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = "fr";
+    document.title = pageLegale
+      ? `Mentions légales et confidentialité · ${PROFIL.prenom} ${PROFIL.nom}`
+      : `${PROFIL.prenom} ${PROFIL.nom}, développeur IA & web`;
+    // Après un changement de « page », on se place sur l'ancre demandée (ou en haut).
+    const cible = hash && hash !== "#mentions-legales" ? document.getElementById(hash.slice(1)) : null;
+    if (cible) cible.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [pageLegale, hash]);
 
   return (
     <>
       <style>{CSS}</style>
-      <a className="evitement" href="#projets">
-        Aller aux projets
+      <a className="evitement" href={pageLegale ? "#contenu-legal" : "#projets"}>
+        {pageLegale ? "Aller au contenu" : "Aller aux projets"}
       </a>
       <Navbar />
-      <main>
-        <Hero />
-        <Projets />
-        <APropos />
-        <Parcours />
-        <Competences />
-        <Contact />
-      </main>
+      {pageLegale ? (
+        <PageLegale />
+      ) : (
+        <main>
+          <Hero />
+          <Projets />
+          <APropos />
+          <Parcours />
+          <Competences />
+          <Contact />
+        </main>
+      )}
       <Footer />
     </>
   );
@@ -1591,6 +1766,22 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .contact-infos { margin-top: 1.75rem; display: flex; align-items: center; gap: .5rem; font-size: .95rem; color: var(--muted); }
 
 /* Pied de page */
+/* Page légale */
+.legal { padding-block: 8rem 5rem; }
+.legal-int { max-width: 760px; }
+.legal-retour { display: inline-block; margin-bottom: 2rem; font-weight: 600; color: var(--muted); }
+.legal-retour:hover { color: var(--ink); }
+.legal-maj { margin-top: .75rem; color: var(--muted); font-size: .95rem; }
+.legal-titre-2 { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--line); scroll-margin-top: 5rem; }
+.legal section { margin-top: 2.5rem; }
+.legal h2 { font-family: var(--display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+.legal h3 { margin-top: 1.5rem; font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+.legal p, .legal-liste { margin-top: .75rem; color: var(--text); line-height: 1.7; }
+.legal strong { color: var(--ink); font-weight: 600; }
+.legal-liste { padding-left: 1.25rem; list-style: disc; }
+.legal-liste li + li { margin-top: .4rem; }
+.legal-bas { margin-top: 3.5rem; }
+
 .footer { border-top: 1px solid var(--line); }
 .footer-int { display: flex; flex-direction: column; gap: 1.5rem; padding-block: 2.5rem; }
 .footer-marque { display: flex; flex-direction: column; gap: .5rem; }
