@@ -12,13 +12,13 @@ import { useEffect, useId, useState } from "react";
 /* Contenu                                                                     */
 /* -------------------------------------------------------------------------- */
 
-// Fichiers à placer dans le dossier public/ du projet (noms exacts, sans espace) :
+// Fichiers à placer dans le dossier public/ du projet (noms exacts) :
 //   public/photo-marius.jpg
-//   public/CV_Marius_Ceugniet.pdf
+//   public/CV CEUGNIET Marius.pdf
 //   public/projets/  (captures des projets)
 const PHOTO_URL = "/photo-marius.jpg";
-const CV_URL = "/CV_Marius_Ceugniet.pdf";
-const CV_NOM = "CV_Marius_Ceugniet.pdf"; // nom du fichier quand on le télécharge
+const CV_NOM = "CV CEUGNIET Marius.pdf"; // nom du fichier quand on le télécharge
+const CV_URL = "/" + encodeURIComponent(CV_NOM); // espaces encodés en %20
 
 const PROFIL = {
   prenom: "Marius",
