@@ -952,7 +952,7 @@ function APropos() {
                 <p className="apropos-role">Étudiant développeur IA & web</p>
               </div>
             </div>
-            <h2 className="titre">Qui je suis</h2>
+            <h2 className="titre">Qui suis-je&nbsp;?</h2>
           </div>
         </div>
 
@@ -1624,7 +1624,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .hero-recents a, .hero-recents a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.35); text-underline-offset: 4px; }
 .hero-recents a:hover { text-decoration-color: var(--ink); }
 
-.hero-photo-cadre { position: relative; isolation: isolate; width: min(14rem, 62vw); margin-top: 1rem; }
+.hero-photo-cadre { position: relative; isolation: isolate; width: min(12rem, 54vw); margin-top: 1rem; }
 .hero-photo-halo { position: absolute; inset: -14%; z-index: -1; border-radius: 50%; opacity: .45; filter: blur(56px); }
 .portrait-anneau { display: block; padding: 4px; border-radius: 50%; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9); }
 .portrait-anneau img, .portrait-initiales { width: 100%; aspect-ratio: 1; height: auto; border-radius: 50%; object-fit: cover; border: 6px solid var(--night); background: var(--night-2); }
@@ -1673,7 +1673,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .points li { display: flex; gap: .75rem; line-height: 1.55; color: var(--text); }
 .point { flex: none; width: .45rem; height: .45rem; margin-top: .55em; border-radius: 50%; }
 
-/* Qui je suis */
+/* Qui suis-je ? */
 .collant { position: static; }
 .apropos-identite { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
 .portrait--petit { width: 4.5rem; flex: none; padding: 3px; }
@@ -1797,7 +1797,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .langues { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   .carte { padding: .75rem 2rem; }
   .puce { display: inline-flex; }
-  .hero-photo-cadre { width: 17rem; margin-inline: 4.5rem; }
+  .hero-photo-cadre { width: 14.5rem; margin-inline: 4.5rem; }
 }
 @media (min-width: 768px) {
   .wrap { padding-inline: 2rem; }
@@ -1832,7 +1832,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-grille { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem; }
   .hero-texte { grid-column: span 7; }
   .hero-photo { order: 0; grid-column: span 5; display: flex; justify-content: center; }
-  .hero-photo-cadre { width: min(100%, 22rem); margin: 0; }
+  .hero-photo-cadre { width: min(100%, 18.5rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .contact-tel { order: 1; grid-column: span 4; }
