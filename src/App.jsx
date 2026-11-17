@@ -342,6 +342,40 @@ function Portrait({ className = "" }) {
   );
 }
 
+// Texte qui tourne autour de la photo du haut de page : il ne passe jamais sur le visage.
+// Chaque info est précédée d'une étoile de la couleur de la marque.
+const ANNEAU = [
+  { texte: "Epitech Lille · IA & data", couleur: "var(--magenta)" },
+  { texte: "Fondateur de LMS Digital", couleur: "var(--cyan)" },
+  { texte: "Stage d'avril à juillet 2027", couleur: "var(--orange)" },
+];
+const ANNEAU_RAYON = 161; // rayon de la ligne de base du texte, dans un carré de 400
+
+function AnneauTexte() {
+  const id = "anneau" + useId().replace(/[^a-zA-Z0-9]/g, "");
+  const r = ANNEAU_RAYON;
+  // Cercle tracé dans le sens horaire depuis la gauche : les lettres pointent vers l'extérieur.
+  const chemin = `M ${200 - r},200 a ${r},${r} 0 1,1 ${2 * r},0 a ${r},${r} 0 1,1 ${-2 * r},0`;
+  return (
+    <svg className="anneau" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+      <defs>
+        <path id={id} d={chemin} />
+      </defs>
+      <circle className="anneau-orbite" cx="200" cy="200" r="151" />
+      <text className="anneau-texte">
+        <textPath href={`#${id}`} textLength={(2 * Math.PI * r).toFixed(1)} lengthAdjust="spacing">
+          {ANNEAU.map(({ texte, couleur }) => (
+            <tspan key={texte}>
+              <tspan fill={couleur}>✦</tspan>
+              {`  ${texte.toUpperCase()}  `}
+            </tspan>
+          ))}
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
 function Telephone({ children }) {
   return (
     <div className="telephone">
@@ -481,19 +515,8 @@ function Hero() {
         <div className="hero-photo">
           <div className="hero-photo-cadre rise">
             <span className="hero-photo-halo degrade" aria-hidden="true" />
-            <Portrait />
-            <span className="puce puce-1" aria-hidden="true">
-              <i style={{ background: "linear-gradient(135deg,#8b5cf6,#ec4899)" }}>✦</i>
-              Epitech Lille, IA & data
-            </span>
-            <span className="puce puce-2" aria-hidden="true">
-              <i style={{ background: "linear-gradient(135deg,#3b82f6,#22d3ee)" }}>▢</i>
-              Fondateur de LMS Digital
-            </span>
-            <span className="puce puce-3" aria-hidden="true">
-              <i style={{ background: "linear-gradient(135deg,#f97316,#ef4444)" }}>⚡</i>
-              Stage d'avril à juillet 2027
-            </span>
+            <AnneauTexte />
+            <Portrait className="portrait--hero" />
           </div>
         </div>
       </div>
@@ -1590,12 +1613,12 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .nav-liens > a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--violet); }
 .nav-liens > a.nav-cta, .nav-liens > a.nav-cta:hover {
   display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 1rem .5rem .75rem; border-radius: 999px;
-  background: var(--ink); color: var(--night); font-size: .92rem; font-weight: 600; text-decoration: none;
+  background: var(--ink); color: var(--night); font-size: .92rem; font-weight: 600; text-decoration: none; white-space: nowrap;
 }
 .nav-liens > a.nav-cta:hover { background: #e9e6ff; }
 .nav-cv, .nav-liens > a.nav-cv, .nav-liens > a.nav-cv:hover {
   display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .95rem .45rem .75rem; border-radius: 999px;
-  border: 1px solid rgb(255 255 255 / 0.28); color: var(--ink); font-size: .92rem; font-weight: 600; text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 0.28); color: var(--ink); font-size: .92rem; font-weight: 600; text-decoration: none; white-space: nowrap;
   transition: background-color .15s, border-color .15s;
 }
 .nav-cv:hover, .nav-liens > a.nav-cv:hover { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.5); }
@@ -1624,22 +1647,22 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .hero-recents a, .hero-recents a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.35); text-underline-offset: 4px; }
 .hero-recents a:hover { text-decoration-color: var(--ink); }
 
-.hero-photo-cadre { position: relative; isolation: isolate; width: min(12rem, 54vw); margin-top: 1rem; }
-.hero-photo-halo { position: absolute; inset: -14%; z-index: -1; border-radius: 50%; opacity: .45; filter: blur(56px); }
+/* Photo du haut de page : la photo au centre, une orbite pointillée, puis le texte qui tourne autour. */
+.hero-photo-cadre {
+  --taille: min(17rem, 76vw);
+  position: relative; isolation: isolate; width: var(--taille); aspect-ratio: 1;
+  margin: 0 0 -1rem calc(var(--taille) * -0.07);
+}
+.hero-photo-halo { position: absolute; inset: 8%; z-index: -1; border-radius: 50%; opacity: .45; filter: blur(56px); }
+.portrait--hero { position: absolute; inset: 14%; }
+.anneau { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: tourne 70s linear infinite; }
+.hero-photo-cadre:hover .anneau { animation-play-state: paused; }
+.anneau-orbite { fill: none; stroke: rgb(255 255 255 / 0.22); stroke-width: 1.4; stroke-dasharray: 0 6.5; stroke-linecap: round; }
+.anneau-texte { font-family: var(--sans); font-size: 14.5px; font-weight: 600; letter-spacing: .265em; fill: var(--text); }
+@keyframes tourne { to { rotate: 360deg; } }
 .portrait-anneau { display: block; padding: 4px; border-radius: 50%; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9); }
 .portrait-anneau img, .portrait-initiales { width: 100%; aspect-ratio: 1; height: auto; border-radius: 50%; object-fit: cover; border: 6px solid var(--night); background: var(--night-2); }
 .portrait-initiales { display: grid; place-items: center; font-family: var(--display); font-size: 3.5rem; font-weight: 700; color: var(--ink); }
-.puce {
-  position: absolute; display: none; align-items: center; gap: .55rem; padding: .4rem .95rem .4rem .4rem; border-radius: 999px;
-  background: rgb(24 22 47 / 0.92); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.22), 0 14px 28px -14px rgb(0 0 0 / 0.8);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--ink); font-size: .9rem; font-weight: 600; white-space: nowrap;
-  animation: rise .9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-}
-.puce i { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; font-size: .72rem; font-style: normal; color: #fff; }
-.puce-1 { top: 6%; left: -16%; animation-delay: .35s; }
-.puce-2 { top: 47%; right: -22%; animation-delay: .5s; }
-.puce-3 { bottom: 4%; left: -8%; animation-delay: .65s; }
-
 @keyframes rise { from { opacity: 0; translate: 0 32px; } to { opacity: 1; translate: 0 0; } }
 .rise { animation: rise .9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; animation-delay: .1s; }
 
@@ -1796,15 +1819,12 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .competences { grid-template-columns: 1fr 1fr; }
   .langues { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   .carte { padding: .75rem 2rem; }
-  .puce { display: inline-flex; }
-  .hero-photo-cadre { width: 14.5rem; margin-inline: 4.5rem; }
+  .hero-photo-cadre { --taille: 20rem; }
 }
 @media (min-width: 768px) {
   .wrap { padding-inline: 2rem; }
   .bloc { padding-block: 8rem; }
   .nav-int { height: 4.5rem; }
-  .nav-liens { display: flex; }
-  .nav-burger, .menu-mobile, .nav-cv--mobile { display: none; }
   .wordmark-grand { font-size: 1.4rem; }
   .hero { padding: 8.5rem 0 7rem; }
   .hero-titre-petit { font-size: 1rem; }
@@ -1820,6 +1840,9 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .footer-int { flex-direction: row; align-items: center; justify-content: space-between; }
 }
 @media (min-width: 1024px) {
+  /* Le menu complet n'a la place de tenir sur une ligne qu'à partir de 1024 px. */
+  .nav-liens { display: flex; }
+  .nav-burger, .menu-mobile, .nav-cv--mobile { display: none; }
   .grille-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem; }
   .col-4 { grid-column: span 4; }
   .col-5 { grid-column: span 5; }
@@ -1832,7 +1855,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-grille { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem; }
   .hero-texte { grid-column: span 7; }
   .hero-photo { order: 0; grid-column: span 5; display: flex; justify-content: center; }
-  .hero-photo-cadre { width: min(100%, 18.5rem); margin: 0; }
+  .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .contact-tel { order: 1; grid-column: span 4; }
@@ -1841,7 +1864,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .puce { animation: none; }
+  .rise, .anneau { animation: none; }
   .mail-curseur { animation: none !important; }
   .carte-visuel--capture img, .carte-projet:hover .carte-visuel--capture img { transition: none; transform: none; }
 }
