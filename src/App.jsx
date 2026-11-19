@@ -38,7 +38,7 @@ const DOMAINES = {
   web: "Web & cybersécurité",
 };
 
-// Les 8 projets. Ceux qui ont une `image` affichent une vraie capture
+// Les 9 projets. Ceux qui ont une `image` affichent une vraie capture
 // (fichiers dans public/projets/, format 16:9). Les autres gardent leur illustration
 // (voir « Visuels des projets ») : pour mettre une vraie capture, ajoute
 // image: "/projets/nom.webp" et alt: "Ce que montre la capture".
@@ -79,6 +79,19 @@ const PROJETS = [
     lien: "https://github.com/klasken/Jobaggregator",
     image: "/projets/jobaggregator.webp",
     alt: "L'application Joby Find en mode sombre : liste d'offres et recommandation IA avec le taux de correspondance",
+  },
+  {
+    id: "nextbuy",
+    nom: "NextBuy",
+    domaine: "ia",
+    couleur: C.orange,
+    description:
+      "Prédiction du réachat d'un produit sur 1,4 million de commandes. En équipe, j'ai entraîné le modèle Random Forest.",
+    stack: ["Scikit-learn", "Pandas", "Streamlit"],
+    lien: "https://github.com/klasken/Nextbuy",
+    // Capture du vrai dashboard Streamlit du dépôt (images/dashboard.png), recadrée en 16:9.
+    image: "/projets/nextbuy.webp",
+    alt: "Le dashboard Streamlit de NextBuy : produit Banana un samedi, réachat probable à 86,5 % et moment idéal à 22h",
   },
   {
     id: "tardis",
@@ -141,56 +154,6 @@ const PROJETS = [
   },
 ];
 
-const EXPERIENCES = [
-  {
-    date: "Depuis mars 2026",
-    structure: "LMS Digital",
-    role: "Fondateur",
-    lieu: "Auto-entreprise de création de sites web, Lille",
-    couleur: C.cyan,
-    lien: { href: "https://lms-digital.com", label: "lms-digital.com" },
-  },
-  {
-    date: "Juin 2026, 1 mois",
-    structure: "Obsidian Travel",
-    role: "Développeur front-end React, en stage",
-    lieu: "Full remote",
-    couleur: C.violet,
-    points: [
-      "Conception et développement de la première vitrine web de l'entreprise : une landing page en React.",
-      "Déploiement du site sur Vercel et mise en place de la redirection des prospects vers WhatsApp.",
-    ],
-  },
-  {
-    date: "Juillet – août 2024",
-    structure: "Brasserie Bedague",
-    role: "Employé saisonnier",
-    lieu: "Aire-sur-la-Lys",
-    couleur: C.magenta,
-    points: [
-      "Création d'un tableur Excel pour calculer le prix des commandes clients.",
-      "Organisation et rangement du stock de caisses de boissons par type de produit.",
-    ],
-  },
-];
-
-const FORMATIONS = [
-  {
-    date: "2025 – 2028",
-    structure: "Epitech",
-    role: "Bachelor Informatique, 2ᵉ année, parcours IA & data",
-    lieu: "Lille",
-    couleur: C.orange,
-  },
-  {
-    date: "2021 – 2024",
-    structure: "Lycée Vauban",
-    role: "Baccalauréat général, spécialités Mathématiques et NSI",
-    lieu: "Aire-sur-la-Lys",
-    couleur: C.cyan,
-  },
-];
-
 const COMPETENCES = [
   {
     titre: "IA & data",
@@ -210,6 +173,36 @@ const COMPETENCES = [
   },
 ];
 
+// Section « Au-delà du code ». L'icône est choisie par son nom (voir ICONES_PASSIONS).
+const PASSIONS = [
+  {
+    titre: "Piano",
+    qualite: "Patience",
+    couleur: C.cyan,
+    icone: "piano",
+    texte:
+      "Reprendre le même passage jusqu'à ce qu'il sonne juste. C'est la même patience qu'il faut pour entraîner un modèle.",
+  },
+  {
+    titre: "Musculation",
+    qualite: "Régularité",
+    couleur: C.magenta,
+    icone: "haltere",
+    texte: "Un programme, des séances régulières et des progrès qui se mesurent. J'avance sur mes projets de la même façon.",
+  },
+  {
+    titre: "Belote",
+    qualite: "Stratégie",
+    couleur: C.orange,
+    icone: "pique",
+    texte:
+      "Je joue en concours : compter les cartes, anticiper les coups adverses et bien s'entendre avec son partenaire.",
+  },
+];
+
+// Projets mis en avant en haut de page (par id).
+const PHARES = ["start-trek", "codename", "job-aggregator"];
+
 const NIVEAUX = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const LANGUES = [
   { nom: "Français", niveau: "Langue maternelle", rang: 6 },
@@ -221,7 +214,7 @@ const FAITS = [
   { titre: "Basé à Lille", texte: "Permis B et véhiculé." },
   { titre: "Stage de 4 mois", texte: "D'avril à juillet 2027, en développement informatique." },
   { titre: "Epitech, parcours IA & data", texte: "Bachelor Informatique, de 2025 à 2028." },
-  { titre: "En dehors du code", texte: "Piano, musculation et belote." },
+  { titre: "Premier stage en entreprise", texte: "Développeur front-end React chez Obsidian Travel, en juin 2026." },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -281,6 +274,12 @@ const IcCheck = (p) => (
     <path d="M20 6 9 17l-5-5" />
   </Icone>
 );
+const IcCode = (p) => (
+  <Icone {...p}>
+    <path d="m16 18 6-6-6-6" />
+    <path d="m8 6-6 6 6 6" />
+  </Icone>
+);
 const IcMenu = (p) => (
   <Icone {...p}>
     <path d="M4 6h16M4 12h16M4 18h16" />
@@ -291,6 +290,42 @@ const IcFermer = (p) => (
     <path d="M18 6 6 18M6 6l12 12" />
   </Icone>
 );
+const IcGithub = (p) => (
+  <Icone {...p}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </Icone>
+);
+const IcFlecheBas = (p) => (
+  <Icone {...p}>
+    <path d="M12 5v14" />
+    <path d="m19 12-7 7-7-7" />
+  </Icone>
+);
+// Clavier de piano : trois touches blanches visibles, deux noires pleines.
+const IcPiano = (p) => (
+  <Icone {...p}>
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+    <path d="M9 13v7M15 13v7" />
+    <rect x="7" y="4" width="4" height="9" rx="1" fill="currentColor" />
+    <rect x="13" y="4" width="4" height="9" rx="1" fill="currentColor" />
+  </Icone>
+);
+const IcHaltere = (p) => (
+  <Icone {...p}>
+    <rect x="5" y="6.5" width="3.5" height="11" rx="1" />
+    <rect x="15.5" y="6.5" width="3.5" height="11" rx="1" />
+    <path d="M8.5 12h7M2.5 9.5v5M21.5 9.5v5" />
+  </Icone>
+);
+const IcPique = (p) => (
+  <Icone {...p}>
+    <path d="M5 9c-1.5 1.5-3 3.2-3 5.5A5.5 5.5 0 0 0 7.5 20c1.8 0 3-.5 4.5-2 1.5 1.5 2.7 2 4.5 2a5.5 5.5 0 0 0 5.5-5.5c0-2.3-1.5-4-3-5.5l-7-7-7 7Z" />
+    <path d="M12 18v4" />
+  </Icone>
+);
+const ICONES_PASSIONS = { piano: IcPiano, haltere: IcHaltere, pique: IcPique };
+
 /* -------------------------------------------------------------------------- */
 /* Petits composants d'identité                                               */
 /* -------------------------------------------------------------------------- */
@@ -367,7 +402,7 @@ function AnneauTexte() {
           {ANNEAU.map(({ texte, couleur }) => (
             <tspan key={texte}>
               <tspan fill={couleur}>✦</tspan>
-              {`  ${texte.toUpperCase()}  `}
+              {`\u00a0\u00a0${texte.toUpperCase()}\u00a0\u00a0`}
             </tspan>
           ))}
         </textPath>
@@ -391,8 +426,8 @@ function Telephone({ children }) {
 
 const LIENS = [
   { href: "#projets", label: "Projets" },
-  { href: "#parcours", label: "Parcours" },
   { href: "#competences", label: "Compétences" },
+  { href: "#au-dela", label: "Au-delà du code" },
 ];
 
 function Navbar() {
@@ -506,10 +541,23 @@ function Hero() {
               Voir les projets
             </a>
           </div>
-          <p className="hero-recents">
-            À voir&nbsp;: <a href="#start-trek">Start Trek</a>, <a href="#codename">Codename</a> et{" "}
-            <a href="#job-aggregator">Job Aggregator</a>.
-          </p>
+          <div className="hero-phares">
+            <p className="hero-phares-titre">Projets phares</p>
+            <ul>
+              {PHARES.map((id) => {
+                const p = PROJETS.find((x) => x.id === id);
+                return (
+                  <li key={id}>
+                    <a href={`#${id}`} className="puce-projet">
+                      <span className="puce-point" style={{ background: p.couleur, boxShadow: `0 0 12px ${p.couleur}` }} />
+                      {p.nom}
+                      <IcFlecheBas className="ic ic-35" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
 
         <div className="hero-photo">
@@ -879,52 +927,87 @@ function Etiquette({ domaine, couleur, texte }) {
   );
 }
 
-function Tags({ items }) {
-  return (
-    <ul className="tags" aria-label="Technologies">
-      {items.map((t) => (
-        <li key={t}>{t}</li>
-      ))}
-    </ul>
-  );
-}
-
+// Carte projet sur le modèle des réalisations de lms-digital.com :
+// la capture dans une fenêtre de navigateur avec un halo coloré derrière,
+// puis l'étiquette, le nom, la stack, la description et un bouton.
 function CarteProjet({ p }) {
   const Illustration = COUVERTURES[p.id];
   // Si la capture ne se charge pas (fichier absent de public/projets/), on revient à l'illustration.
   const [imageOk, setImageOk] = useState(true);
   const avecImage = p.image && imageOk;
   return (
-    <li id={p.id} className="carte-projet">
-      <div className={`carte-visuel${avecImage ? " carte-visuel--capture" : ""}`} style={{ "--c": `${p.couleur}80` }}>
-        {avecImage ? (
-          <picture>
-            {p.imageFixe && <source srcSet={p.imageFixe} media="(prefers-reduced-motion: reduce)" />}
-            <img
-              src={p.image}
-              alt={p.alt || `Capture du projet ${p.nom}`}
-              width="1280"
-              height="720"
-              loading="lazy"
-              decoding="async"
-              onError={() => setImageOk(false)}
-            />
-          </picture>
-        ) : (
-          Illustration && <Illustration couleur={p.couleur} />
-        )}
+    <li id={p.id} className="projet">
+      <div className="projet-visuel">
+        <span
+          className="projet-halo"
+          style={{ background: `radial-gradient(closest-side, ${p.couleur} 45%, transparent)` }}
+          aria-hidden="true"
+        />
+        {/* Toute la fenêtre renvoie au dépôt GitHub. Le bouton « Voir le code » reste le lien au clavier. */}
+        <a
+          className="fenetre"
+          href={p.lien}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={-1}
+          aria-label={`${p.nom} : voir le code sur GitHub (nouvel onglet)`}
+        >
+          <div className="fenetre-barre" aria-hidden="true">
+            <span className="fenetre-points">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span className="fenetre-onglet">
+              <span className="fenetre-onglet-point" style={{ background: p.couleur }} />
+              <span className="fenetre-onglet-texte">{p.nom}</span>
+            </span>
+            <span className="fenetre-cale" />
+          </div>
+          <div
+            className={`fenetre-ecran${avecImage ? "" : " fenetre-ecran--illu"}`}
+            style={{ "--c": `${p.couleur}80` }}
+          >
+            {avecImage ? (
+              <picture>
+                {p.imageFixe && <source srcSet={p.imageFixe} media="(prefers-reduced-motion: reduce)" />}
+                <img
+                  src={p.image}
+                  alt={p.alt || `Capture du projet ${p.nom}`}
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setImageOk(false)}
+                />
+              </picture>
+            ) : (
+              Illustration && <Illustration couleur={p.couleur} />
+            )}
+            <span className="fenetre-indice" aria-hidden="true">
+              <IcGithub className="ic ic-35" />
+              Ouvrir sur GitHub
+            </span>
+          </div>
+        </a>
       </div>
-      <div className="carte-corps">
+
+      <div className="projet-texte">
         <Etiquette domaine={p.domaine} couleur={p.couleur} />
-        <h4 className="carte-nom">{p.nom}</h4>
-        <p className="carte-desc">{p.description}</p>
-        <div className="carte-bas">
-          <Tags items={p.stack} />
-          <a className="lien-souligne" href={p.lien} target="_blank" rel="noopener noreferrer">
-            Voir le code
-            <IcExterne className="ic ic-35" />
-          </a>
-        </div>
+        <h3 className="projet-nom">{p.nom}</h3>
+        <p className="projet-stack">
+          <IcCode className="ic ic-35" />
+          <span className="sr-only">Technologies : </span>
+          {p.stack.join(" · ")}
+        </p>
+        <p className="projet-desc">{p.description}</p>
+      </div>
+
+      <div className="projet-bas">
+        <a className="btn btn-contour btn-mini" href={p.lien} target="_blank" rel="noopener noreferrer">
+          Voir le code
+          <IcExterne className="ic ic-35" />
+        </a>
       </div>
     </li>
   );
@@ -942,11 +1025,11 @@ function Projets() {
             de l'IA au web.
           </h2>
           <p className="lead col-5 entete-texte">
-            Huit projets, de l'apprentissage par renforcement à la sécurité web. Le code de chacun est sur GitHub.
+            Neuf projets, de l'apprentissage par renforcement à la sécurité web. Le code de chacun est sur GitHub.
           </p>
         </div>
 
-        <ul className="cartes">
+        <ul className="projets">
           {PROJETS.map((p) => (
             <CarteProjet key={p.id} p={p} />
           ))}
@@ -1004,72 +1087,6 @@ function APropos() {
   );
 }
 
-function Entree({ e }) {
-  return (
-    <li className="entree">
-      <div className="entree-tete">
-        <p className="entree-date" style={{ color: e.couleur }}>
-          {e.date}
-        </p>
-        <h4 className="entree-nom">{e.structure}</h4>
-        <p className="entree-role">{e.role}</p>
-        <p className="entree-lieu">
-          <IcPin className="ic ic-4" />
-          {e.lieu}
-        </p>
-        {e.lien && (
-          <a className="lien-souligne entree-lien" href={e.lien.href} target="_blank" rel="noopener noreferrer">
-            {e.lien.label}
-            <IcExterne className="ic ic-35" />
-          </a>
-        )}
-      </div>
-      {e.points && (
-        <ul className="points">
-          {e.points.map((p) => (
-            <li key={p}>
-              <span className="point" style={{ background: e.couleur }} aria-hidden="true" />
-              {p}
-            </li>
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
-function Parcours() {
-  return (
-    <section id="parcours" className="bloc">
-      <div className="wrap grille-12">
-        <div className="col-4">
-          <div className="collant">
-            <h2 className="titre">Mon parcours</h2>
-            <p className="lead parcours-lead">
-              Une auto-entreprise, un stage et un job d'été, en parallèle du Bachelor d'Epitech.
-            </p>
-          </div>
-        </div>
-
-        <div className="col-8">
-          <h3 className="sous-titre">Expérience</h3>
-          <ol className="entrees">
-            {EXPERIENCES.map((e) => (
-              <Entree key={e.structure} e={e} />
-            ))}
-          </ol>
-          <h3 className="sous-titre sous-titre--espace">Formation</h3>
-          <ol className="entrees">
-            {FORMATIONS.map((e) => (
-              <Entree key={e.structure} e={e} />
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Competences() {
   return (
     <section id="competences" className="bloc">
@@ -1115,6 +1132,37 @@ function Competences() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function AuDela() {
+  return (
+    <section id="au-dela" className="bloc">
+      <div className="wrap">
+        <div className="grille-12 entete">
+          <h2 className="titre titre-grand col-7">Au-delà du code</h2>
+          <p className="lead col-5 entete-texte">
+            Ce que je fais quand je ne code pas, et ce que ça m'apporte dans mes projets.
+          </p>
+        </div>
+
+        <ul className="passions">
+          {PASSIONS.map((p) => {
+            const Icone = ICONES_PASSIONS[p.icone];
+            return (
+              <li key={p.titre} className="passion" style={{ "--c": p.couleur }}>
+                <span className="passion-icone" aria-hidden="true">
+                  <Icone className="ic" />
+                </span>
+                <p className="passion-qualite">{p.qualite}</p>
+                <h3 className="passion-titre">{p.titre}</h3>
+                <p className="passion-texte">{p.texte}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -1486,8 +1534,8 @@ export default function App() {
           <Hero />
           <Projets />
           <APropos />
-          <Parcours />
           <Competences />
+          <AuDela />
           <Contact />
         </main>
       )}
@@ -1638,14 +1686,25 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   display: block; margin-top: .4rem; padding: .16em 0 .1em;
   font-size: clamp(1.85rem, 9.4vw, 3.4rem); font-weight: 700; line-height: .95; letter-spacing: -0.04em;
 }
+
+
 .hero-intro { margin-top: 1.75rem; max-width: 34rem; font-size: 1.15rem; line-height: 1.65; color: var(--text); }
 .hero-dispo { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: .75rem; font-weight: 600; color: var(--ink); }
 .hero-dispo .pastille { margin-top: .5em; }
 .pastille { width: .625rem; height: .625rem; border-radius: 50%; flex: none; box-shadow: 0 0 16px -2px rgb(240 98 192 / 0.9); }
 .hero-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem; }
-.hero-recents { margin-top: 2rem; font-size: .95rem; color: var(--muted); }
-.hero-recents a, .hero-recents a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.35); text-underline-offset: 4px; }
-.hero-recents a:hover { text-decoration-color: var(--ink); }
+.hero-phares { margin-top: 2.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; }
+.hero-phares-titre { font-size: .9rem; color: var(--muted); }
+.hero-phares ul { display: flex; flex-wrap: wrap; gap: .5rem; }
+.puce-projet, .puce-projet:hover {
+  display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .85rem .45rem .8rem; border-radius: 999px;
+  font-size: .9rem; font-weight: 600; color: var(--ink); background: rgb(255 255 255 / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16); transition: background-color .15s, box-shadow .15s;
+}
+.puce-projet:hover { background: rgb(255 255 255 / 0.08); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.45); }
+.puce-projet .ic { color: var(--muted); transition: translate .2s; }
+.puce-projet:hover .ic { translate: 0 2px; color: var(--ink); }
+.puce-point { width: .45rem; height: .45rem; flex: none; border-radius: 50%; }
 
 /* Photo du haut de page : la photo au centre, une orbite pointillée, puis le texte qui tourne autour. */
 .hero-photo-cadre {
@@ -1670,31 +1729,61 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .entete { gap: 1.25rem; }
 .etiquette { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; font-weight: 600; }
 .etiquette-point { width: .5rem; height: .5rem; border-radius: 50%; }
-.cartes { margin-top: 3.5rem; display: grid; gap: 1.5rem; }
-.carte-projet { display: flex; flex-direction: column; overflow: hidden; border-radius: 1.25rem; background: var(--night-2); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .2s; }
-.carte-projet:hover { box-shadow: inset 0 0 0 1px var(--line-fort); }
-.carte-visuel {
-  position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line);
+/* Cartes projet, façon réalisations de lms-digital.com : pas de boîte, une fenêtre de navigateur */
+.projets { margin-top: 3.5rem; display: grid; gap: 3.5rem 1.75rem; }
+.projet { display: flex; flex-direction: column; min-width: 0; }
+.projet-visuel { position: relative; isolation: isolate; }
+.projet-halo { position: absolute; inset: -2.5rem -1.5rem; z-index: -1; opacity: .3; filter: blur(40px); pointer-events: none; transition: opacity .35s; }
+.projet:hover .projet-halo { opacity: .5; }
+.fenetre {
+  display: block; overflow: hidden; border-radius: .75rem; background: #1c1932;
+  box-shadow: 0 40px 70px -36px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.12);
+  transition: box-shadow .2s, translate .35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.projet:hover .fenetre { translate: 0 -4px; box-shadow: 0 48px 80px -36px rgb(0 0 0 / 0.95), 0 0 0 1px rgb(255 255 255 / 0.26); }
+.fenetre-barre { display: flex; align-items: center; gap: .75rem; height: 1.75rem; padding-inline: .7rem; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
+.fenetre-points { display: flex; gap: .3rem; flex: none; }
+.fenetre-points span { width: .45rem; height: .45rem; border-radius: 50%; background: rgb(255 255 255 / 0.2); }
+.fenetre-onglet {
+  margin-inline: auto; display: flex; align-items: center; gap: .35rem; min-width: 0; max-width: 62%;
+  height: 1.05rem; padding-inline: .55rem; border-radius: .375rem; background: rgb(255 255 255 / 0.06);
+  font-size: .62rem; line-height: 1; color: var(--muted);
+}
+.fenetre-onglet-point { width: .35rem; height: .35rem; flex: none; border-radius: 50%; }
+.fenetre-onglet-texte { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fenetre-cale { width: 1.95rem; flex: none; }
+.fenetre-ecran { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0b0a18; }
+.fenetre-ecran--illu {
   background: radial-gradient(95% 95% at 88% 0%, var(--c), transparent 70%), radial-gradient(80% 80% at 0% 100%, rgb(139 123 255 / 0.28), transparent 70%), #141230;
 }
-.carte-visuel img, .couverture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.carte-visuel--capture { background: #0b0a18; }
-.carte-visuel--capture img { transition: transform .5s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.carte-projet:hover .carte-visuel--capture img { transform: scale(1.03); }
+.fenetre-ecran img, .couverture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.fenetre-ecran img { transition: transform .6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.projet:hover .fenetre-ecran img { transform: scale(1.04); }
 .couverture text { font-family: var(--sans); }
-.carte-corps { display: flex; flex-direction: column; flex: 1; padding: 1.5rem 1.5rem 1.6rem; }
-.carte-nom { margin-top: .5rem; font-family: var(--display); font-size: 1.45rem; font-weight: 600; line-height: 1.12; letter-spacing: -0.03em; }
-.carte-desc { margin-top: .65rem; line-height: 1.6; color: var(--text); }
-.carte-bas { margin-top: auto; padding-top: 1.4rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.fenetre-indice {
+  position: absolute; left: .75rem; bottom: .75rem; display: inline-flex; align-items: center; gap: .4rem;
+  padding: .4rem .8rem .4rem .65rem; border-radius: 999px; font-size: .78rem; font-weight: 600; color: var(--ink);
+  background: rgb(12 10 28 / 0.85); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  opacity: 0; translate: 0 6px; transition: opacity .25s, translate .25s;
+}
+.projet:hover .fenetre-indice { opacity: 1; translate: 0 0; }
+/* Arrivée depuis « Projets phares » : le halo du projet s'allume un instant. */
+@keyframes phare { 0%, 35% { opacity: .95; } 100% { opacity: .3; } }
+.projet:target .projet-halo { animation: phare 2.6s ease-out; }
+.projet-texte { margin-top: 1.6rem; }
+.projet .etiquette { font-size: .88rem; }
+.projet-nom { margin-top: .3rem; font-family: var(--display); font-size: 1.35rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+.projet-stack { margin-top: .5rem; display: flex; align-items: center; gap: .4rem; font-size: .85rem; color: var(--muted); }
+.projet-desc { margin-top: .85rem; font-size: .95rem; line-height: 1.6; color: var(--muted); }
+.projet-bas { margin-top: auto; padding-top: 1.25rem; }
+.btn-mini { padding: .5rem 1rem; font-size: .88rem; }
 
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; }
 .tags li { padding: .28rem .8rem; border-radius: 999px; font-size: .85rem; font-weight: 500; color: var(--text); background: var(--night-3); box-shadow: inset 0 0 0 1px var(--line); }
 .tags--grand { margin-top: 1.25rem; }
 .tags--grand li { padding: .45rem .95rem; font-size: .97rem; color: var(--ink); }
 
-.points { display: grid; gap: .8rem; align-content: start; }
-.points li { display: flex; gap: .75rem; line-height: 1.55; color: var(--text); }
-.point { flex: none; width: .45rem; height: .45rem; margin-top: .55em; border-radius: 50%; }
 
 /* Qui suis-je ? */
 .collant { position: static; }
@@ -1708,16 +1797,6 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .faits > div { border-radius: 1rem; padding: 1.25rem 1.4rem; background: var(--night-2); box-shadow: inset 0 0 0 1px var(--line); }
 .faits dt { font-family: var(--display); font-size: 1.02rem; font-weight: 500; line-height: 1.375; letter-spacing: -0.01em; color: var(--ink); }
 .faits dd { margin-top: .4rem; line-height: 1.6; color: var(--muted); }
-
-/* Parcours */
-.parcours-lead { margin-top: 1.25rem; max-width: 22rem; }
-.entrees { margin-top: 1.5rem; }
-.entree { display: grid; gap: 1.5rem; border-top: 1px solid var(--line); padding-block: 2rem; }
-.entree-date { font-size: .97rem; font-weight: 600; }
-.entree-nom { margin-top: .4rem; font-family: var(--display); font-size: 1.5rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
-.entree-role { margin-top: .5rem; color: var(--ink); font-weight: 500; line-height: 1.5; }
-.entree-lieu { margin-top: .5rem; display: flex; align-items: center; gap: .4rem; font-size: .92rem; color: var(--muted); }
-.entree-lien { margin-top: .9rem; }
 
 /* Compétences */
 .competences-titre { max-width: 48rem; }
@@ -1734,6 +1813,27 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .jauge-niveaux { margin-top: .5rem; display: grid; grid-template-columns: repeat(6, 1fr); font-size: .78rem; color: var(--faint); font-variant-numeric: tabular-nums; }
 .jauge-niveaux li { text-align: right; }
 .jauge-niveaux li.atteint { color: var(--text); font-weight: 600; }
+
+/* Au-delà du code, sur le modèle de la section « Méthode » de LMS Digital */
+.passions { margin-top: 3.5rem; display: grid; gap: 1.25rem; }
+.passion {
+  position: relative; isolation: isolate; overflow: hidden; padding: 1.75rem 1.6rem 1.9rem; border-radius: 1.25rem;
+  background: var(--night-2); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .2s;
+}
+.passion::before {
+  content: ""; position: absolute; inset: -40% -20% auto auto; width: 70%; aspect-ratio: 1; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, var(--c), transparent); opacity: .16; filter: blur(30px); transition: opacity .3s;
+}
+.passion:hover { box-shadow: inset 0 0 0 1px var(--line-fort); }
+.passion:hover::before { opacity: .28; }
+.passion-icone {
+  display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border-radius: .9rem; color: var(--c);
+  background: color-mix(in srgb, var(--c) 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
+}
+.passion-icone .ic { width: 1.6rem; height: 1.6rem; }
+.passion-qualite { margin-top: 1.5rem; font-size: .88rem; font-weight: 600; color: var(--c); }
+.passion-titre { margin-top: .3rem; font-family: var(--display); font-size: 1.5rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+.passion-texte { margin-top: .75rem; line-height: 1.6; color: var(--muted); }
 
 /* Contact */
 .contact-grille { align-items: center; gap: 4rem; }
@@ -1815,6 +1915,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 
 /* Responsive : mêmes paliers que Tailwind (sm 640, md 768, lg 1024) */
 @media (min-width: 640px) {
+  .projets { grid-template-columns: 1fr 1fr; gap: 4rem 1.75rem; }
   .faits { grid-template-columns: 1fr 1fr; }
   .competences { grid-template-columns: 1fr 1fr; }
   .langues { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
@@ -1830,8 +1931,6 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-titre-petit { font-size: 1rem; }
   .hero-titre-grand { margin-top: .6rem; font-size: clamp(3rem, 8vw, 5.4rem); }
   .hero-intro { font-size: 1.25rem; }
-  .entree { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; }
-  .cartes { grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 2rem; }
   .tel-lien { width: 270px; }
   .mail { padding: 2.8rem 1.1rem .8rem; font-size: .78rem; }
   .mail-barre strong { font-size: .82rem; }
@@ -1858,14 +1957,17 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .projets { grid-template-columns: repeat(3, 1fr); gap: 4.5rem 2.25rem; }
+  .passions { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .contact-tel { order: 1; grid-column: span 4; }
   .contact-texte { order: 2; grid-column: 6 / span 7; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .anneau { animation: none; }
+  .rise, .anneau, .projet:target .projet-halo { animation: none; }
   .mail-curseur { animation: none !important; }
-  .carte-visuel--capture img, .carte-projet:hover .carte-visuel--capture img { transition: none; transform: none; }
+  .fenetre, .projet:hover .fenetre { transition: none; translate: none; }
+  .fenetre-ecran img, .projet:hover .fenetre-ecran img { transition: none; transform: none; }
 }
 `;
