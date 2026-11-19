@@ -1957,7 +1957,12 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-  .projets { grid-template-columns: repeat(3, 1fr); gap: 4.5rem 2.25rem; }
+  /* 4 projets par ligne sur ordinateur, toujours dans leur fenêtre de navigateur */
+  .projets { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4rem 1.75rem; }
+  .projet-texte { margin-top: 1.4rem; }
+  .projet-nom { font-size: 1.2rem; }
+  .projet-stack { font-size: .8rem; }
+  .projet-desc { font-size: .9rem; line-height: 1.55; }
   .passions { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .contact-tel { order: 1; grid-column: span 4; }
   .contact-texte { order: 2; grid-column: 6 / span 7; }
