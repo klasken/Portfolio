@@ -1017,7 +1017,7 @@ function Projets() {
   return (
     <section id="projets" className="bloc">
       <DefinitionsSvg />
-      <div className="wrap">
+      <div className="wrap wrap--projets">
         <div className="grille-12 entete">
           <h2 className="titre titre-grand col-7">
             Mes projets,
@@ -1622,6 +1622,8 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 /* Mise en page */
 .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 1.25rem; }
 .grille-12 { display: grid; gap: 3rem; }
+/* La section Projets prend plus de largeur que le reste du site pour des fenêtres plus grandes. */
+.wrap--projets { max-width: 1680px; }
 .bloc { position: relative; isolation: isolate; overflow-x: clip; border-top: 1px solid var(--line); padding-block: 5.5rem; }
 .titre { font-family: var(--display); font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
 .titre-grand { font-size: clamp(2.1rem, 5.2vw, 3.6rem); line-height: 1.02; }
@@ -1957,8 +1959,8 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-  /* 4 projets par ligne sur ordinateur, toujours dans leur fenêtre de navigateur */
-  .projets { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4rem 1.75rem; }
+  /* 4 projets par ligne sur ordinateur, serrés, toujours dans leur fenêtre de navigateur */
+  .projets { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3rem .9rem; }
   .projet-texte { margin-top: 1.4rem; }
   .projet-nom { font-size: 1.2rem; }
   .projet-stack { font-size: .8rem; }
@@ -1966,6 +1968,12 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .passions { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .contact-tel { order: 1; grid-column: span 4; }
   .contact-texte { order: 2; grid-column: 6 / span 7; }
+}
+
+@media (min-width: 1280px) {
+  .projet-nom { font-size: 1.35rem; }
+  .projet-stack { font-size: .85rem; }
+  .projet-desc { font-size: .95rem; line-height: 1.6; }
 }
 
 @media (prefers-reduced-motion: reduce) {
