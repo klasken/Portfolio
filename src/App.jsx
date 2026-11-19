@@ -171,14 +171,14 @@ const PASSIONS = [
     couleur: C.cyan,
     icone: "piano",
     texte:
-      "Reprendre le même passage jusqu'à ce qu'il sonne juste. C'est la même patience qu'il faut pour entraîner un modèle.",
+      "Je joue du piano. C'est mon moment pour décrocher des écrans : je découvre de nouveaux morceaux et je les travaille jusqu'à ce qu'ils sonnent juste.",
   },
   {
     titre: "Musculation",
     qualite: "Régularité",
     couleur: C.magenta,
     icone: "haltere",
-    texte: "Un programme, des séances régulières et des progrès qui se mesurent. J'avance sur mes projets de la même façon.",
+    texte: "Je fais de la musculation en salle. J'aime suivre mes progrès d'une séance à l'autre et me fixer de nouveaux objectifs.",
   },
   {
     titre: "Belote",
@@ -1078,7 +1078,7 @@ function AuDela() {
         <div className="grille-12 entete">
           <h2 className="titre titre-grand col-7">Au-delà du code</h2>
           <p className="lead col-5 entete-texte">
-            Ce que je fais quand je ne code pas, et ce que ça m'apporte dans mes projets.
+            Ce que je fais quand je ne code pas.
           </p>
         </div>
 
