@@ -38,7 +38,8 @@ const DOMAINES = {
   web: "Web & cybersécurité",
 };
 
-// Les 9 projets. Ceux qui ont une `image` affichent une vraie capture
+// Les 8 projets, rangés par domaine : d'abord tous les projets IA, puis les autres.
+// Ceux qui ont une `image` affichent une vraie capture
 // (fichiers dans public/projets/, format 16:9). Les autres gardent leur illustration
 // (voir « Visuels des projets ») : pour mettre une vraie capture, ajoute
 // image: "/projets/nom.webp" et alt: "Ce que montre la capture".
@@ -68,17 +69,6 @@ const PROJETS = [
     // Capture du vrai fichier Modelfile du dépôt (lignes 53 à 62).
     image: "/projets/codename.webp",
     alt: "Extrait du Modelfile de Codename : des tentatives d'injection de prompt et la réponse « Accès refusé. »",
-  },
-  {
-    id: "job-aggregator",
-    nom: "Job Aggregator",
-    domaine: "web",
-    couleur: C.magenta,
-    description: "Agrégateur d'offres d'emploi avec API, authentification JWT et matching par IA.",
-    stack: ["FastAPI", "MySQL", "Docker"],
-    lien: "https://github.com/klasken/Jobaggregator",
-    image: "/projets/jobaggregator.webp",
-    alt: "L'application Joby Find en mode sombre : liste d'offres et recommandation IA avec le taux de correspondance",
   },
   {
     id: "nextbuy",
@@ -116,19 +106,6 @@ const PROJETS = [
     alt: "Deux radiographies du thorax du jeu de données : un cas normal et un cas de pneumonie",
   },
   {
-    id: "hack-and-juice",
-    nom: "Hack And Juice",
-    domaine: "web",
-    couleur: C.orange,
-    description: "Recherche et exploitation de failles d'une application web vulnérable.",
-    stack: ["OWASP Juice Shop"],
-    lien: "https://github.com/klasken/Hack_And_Juice",
-    // Capture officielle d'OWASP Juice Shop (licence MIT, © Bjoern Kimminich et contributeurs) :
-    // les challenges Login Jim et Login Bender, deux des 15 résolus dans le projet.
-    image: "/projets/hackandjuice.webp",
-    alt: "OWASP Juice Shop avec les challenges Login Jim et Login Bender résolus",
-  },
-  {
     id: "chatbot",
     nom: "MealMatch",
     domaine: "ia",
@@ -142,15 +119,28 @@ const PROJETS = [
     alt: "Page d'accueil du projet, avec les boutons pour rejoindre le serveur Discord et inviter le bot",
   },
   {
-    id: "etodo",
-    nom: "Etodo",
+    id: "job-aggregator",
+    nom: "Job Aggregator",
     domaine: "web",
-    couleur: C.cyan,
-    description: "Application web de gestion de tâches, conteneurisée avec Docker.",
-    stack: ["React", "TypeScript", "Docker"],
-    lien: "https://github.com/klasken/Etodo",
-    image: "/projets/etodo.webp",
-    alt: "L'application Etodo : liste de tâches avec priorités et filtres",
+    couleur: C.magenta,
+    description: "Agrégateur d'offres d'emploi avec API, authentification JWT et matching par IA.",
+    stack: ["FastAPI", "MySQL", "Docker"],
+    lien: "https://github.com/klasken/Jobaggregator",
+    image: "/projets/jobaggregator.webp",
+    alt: "L'application Joby Find en mode sombre : liste d'offres et recommandation IA avec le taux de correspondance",
+  },
+  {
+    id: "hack-and-juice",
+    nom: "Hack And Juice",
+    domaine: "web",
+    couleur: C.orange,
+    description: "Recherche et exploitation de failles d'une application web vulnérable.",
+    stack: ["OWASP Juice Shop"],
+    lien: "https://github.com/klasken/Hack_And_Juice",
+    // Capture officielle d'OWASP Juice Shop (licence MIT, © Bjoern Kimminich et contributeurs) :
+    // les challenges Login Jim et Login Bender, deux des 15 résolus dans le projet.
+    image: "/projets/hackandjuice.webp",
+    alt: "OWASP Juice Shop avec les challenges Login Jim et Login Bender résolus",
   },
 ];
 
@@ -837,54 +827,6 @@ function CouvertureChatbot({ couleur }) {
   );
 }
 
-function CouvertureEtodo({ couleur }) {
-  const taches = [
-    ["Créer l'API", true],
-    ["Dockeriser l'application", true],
-    ["Écrire les tests", false],
-    ["Préparer la démo", false],
-  ];
-  return (
-    <Couverture couleur={couleur} label="Illustration : application de liste de tâches">
-      <Fenetre clair titre="etodo" />
-      <text x="56" y="66" fontSize="13" fontWeight="700" fill={GRIS.texte}>
-        Mes tâches
-      </text>
-      <text x="344" y="66" fontSize="9" fill={GRIS.doux} textAnchor="end">
-        2 sur 4
-      </text>
-      <rect x="56" y="73" width="288" height="5" rx="2.5" fill={GRIS.trait} />
-      <rect x="56" y="73" width="144" height="5" rx="2.5" fill="url(#cv-marque)" />
-      {taches.map(([t, fait], i) => {
-        const y = 88 + i * 26;
-        return (
-          <g key={t}>
-            <rect x="56" y={y} width="288" height="21" rx="6" fill="#fff" stroke={GRIS.trait} />
-            {fait ? (
-              <>
-                <rect x="64" y={y + 4.5} width="12" height="12" rx="3.5" fill="url(#cv-marque)" />
-                <path d={`M67 ${y + 10.5}l2.5 2.5 4.5-5`} fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </>
-            ) : (
-              <rect x="64.5" y={y + 5} width="11" height="11" rx="3" fill="none" stroke="#c9c6d8" strokeWidth="1.2" />
-            )}
-            <text x="84" y={y + 14.5} fontSize="9.5" fill={fait ? GRIS.doux : GRIS.texte}>
-              {t}
-            </text>
-            {fait && <path d={`M84 ${y + 11}h${t.length * 4.6}`} stroke={GRIS.doux} strokeWidth="0.8" />}
-          </g>
-        );
-      })}
-      <rect x="56" y="196" width="252" height="20" rx="10" fill="#f6f5fb" stroke={GRIS.trait} />
-      <text x="68" y="209.5" fontSize="8.5" fill={GRIS.doux}>
-        Ajouter une tâche
-      </text>
-      <circle cx="330" cy="206" r="10" fill={couleur} />
-      <path d="M330 201.5v9M325.5 206h9" stroke="#141230" strokeWidth="1.8" strokeLinecap="round" />
-    </Couverture>
-  );
-}
-
 // Dégradés partagés par toutes les illustrations (déclarés une seule fois dans la page).
 function DefinitionsSvg() {
   return (
@@ -911,7 +853,6 @@ const COUVERTURES = {
   "dr-cvrie": CouvertureCvrie,
   "hack-and-juice": CouvertureJuice,
   chatbot: CouvertureChatbot,
-  etodo: CouvertureEtodo,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -927,8 +868,8 @@ function Etiquette({ domaine, couleur, texte }) {
   );
 }
 
-// Carte projet sur le modèle des réalisations de lms-digital.com :
-// la capture dans une fenêtre de navigateur avec un halo coloré derrière,
+// Carte projet au même gabarit que les projets de lois-ekollo.fr : une carte encadrée
+// avec, en haut, la capture dans une fenêtre de navigateur façon Mac,
 // puis l'étiquette, le nom, la stack, la description et un bouton.
 function CarteProjet({ p }) {
   const Illustration = COUVERTURES[p.id];
@@ -936,13 +877,8 @@ function CarteProjet({ p }) {
   const [imageOk, setImageOk] = useState(true);
   const avecImage = p.image && imageOk;
   return (
-    <li id={p.id} className="projet">
+    <li id={p.id} className="projet" style={{ "--c": p.couleur }}>
       <div className="projet-visuel">
-        <span
-          className="projet-halo"
-          style={{ background: `radial-gradient(closest-side, ${p.couleur} 45%, transparent)` }}
-          aria-hidden="true"
-        />
         {/* Toute la fenêtre renvoie au dépôt GitHub. Le bouton « Voir le code » reste le lien au clavier. */}
         <a
           className="fenetre"
@@ -1025,7 +961,7 @@ function Projets() {
             de l'IA au web.
           </h2>
           <p className="lead col-5 entete-texte">
-            Neuf projets, de l'apprentissage par renforcement à la sécurité web. Le code de chacun est sur GitHub.
+            Huit projets, de l'apprentissage par renforcement à la sécurité web. Le code de chacun est sur GitHub.
           </p>
         </div>
 
@@ -1622,8 +1558,8 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 /* Mise en page */
 .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 1.25rem; }
 .grille-12 { display: grid; gap: 3rem; }
-/* La section Projets est un peu plus large que le reste du site pour des fenêtres plus grandes. */
-.wrap--projets { max-width: 1440px; }
+/* Section Projets : 1272 px de contenu, comme sur lois-ekollo.fr */
+.wrap--projets { max-width: calc(1272px + 4rem); }
 .bloc { position: relative; isolation: isolate; overflow-x: clip; border-top: 1px solid var(--line); padding-block: 5.5rem; }
 .titre { font-family: var(--display); font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
 .titre-grand { font-size: clamp(2.1rem, 5.2vw, 3.6rem); line-height: 1.02; }
@@ -1731,18 +1667,21 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .entete { gap: 1.25rem; }
 .etiquette { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; font-weight: 600; }
 .etiquette-point { width: .5rem; height: .5rem; border-radius: 50%; }
-/* Cartes projet, façon réalisations de lms-digital.com : pas de boîte, une fenêtre de navigateur */
-.projets { margin-top: 3.5rem; display: grid; gap: 3.5rem 1.75rem; }
-.projet { display: flex; flex-direction: column; min-width: 0; }
-.projet-visuel { position: relative; isolation: isolate; }
-.projet-halo { position: absolute; inset: -2.5rem -1.5rem; z-index: -1; opacity: .3; filter: blur(40px); pointer-events: none; transition: opacity .35s; }
-.projet:hover .projet-halo { opacity: .5; }
-.fenetre {
-  display: block; overflow: hidden; border-radius: .75rem; background: #1c1932;
-  box-shadow: 0 40px 70px -36px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.12);
-  transition: box-shadow .2s, translate .35s cubic-bezier(0.2, 0.7, 0.2, 1);
+/* Cartes projet, même gabarit que lois-ekollo.fr : 4 par ligne, 20 px d'écart, une carte encadrée
+   par projet. La capture garde sa barre de fenêtre façon Mac en haut de la carte. */
+.projets { margin-top: 3rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.projet {
+  --c: var(--violet);
+  display: flex; flex-direction: column; min-width: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--night-2);
+  transition: border-color .25s, box-shadow .25s, translate .25s;
 }
-.projet:hover .fenetre { translate: 0 -4px; box-shadow: 0 48px 80px -36px rgb(0 0 0 / 0.95), 0 0 0 1px rgb(255 255 255 / 0.26); }
+.projet:hover, .projet:focus-within {
+  border-color: var(--c); translate: 0 -3px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 30%, transparent), 0 0 48px color-mix(in srgb, var(--c) 22%, transparent);
+}
+.projet-visuel { position: relative; }
+.fenetre { display: block; background: #1c1932; border-bottom: 1px solid var(--line); }
 .fenetre-barre { display: flex; align-items: center; gap: .75rem; height: 1.75rem; padding-inline: .7rem; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
 .fenetre-points { display: flex; gap: .3rem; flex: none; }
 .fenetre-points span { width: .45rem; height: .45rem; border-radius: 50%; background: rgb(255 255 255 / 0.2); }
@@ -1770,16 +1709,20 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   opacity: 0; translate: 0 6px; transition: opacity .25s, translate .25s;
 }
 .projet:hover .fenetre-indice { opacity: 1; translate: 0 0; }
-/* Arrivée depuis « Projets phares » : le halo du projet s'allume un instant. */
-@keyframes phare { 0%, 35% { opacity: .95; } 100% { opacity: .3; } }
-.projet:target .projet-halo { animation: phare 2.6s ease-out; }
-.projet-texte { margin-top: 1.6rem; }
-.projet .etiquette { font-size: .88rem; }
-.projet-nom { margin-top: .3rem; font-family: var(--display); font-size: 1.35rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
-.projet-stack { margin-top: .5rem; display: flex; align-items: center; gap: .4rem; font-size: .85rem; color: var(--muted); }
-.projet-desc { margin-top: .85rem; font-size: .95rem; line-height: 1.6; color: var(--muted); }
-.projet-bas { margin-top: auto; padding-top: 1.25rem; }
+/* Arrivée depuis « Projets phares » : la carte du projet s'allume un instant. */
+@keyframes phare {
+  0%, 35% { border-color: var(--c); box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent), 0 0 60px color-mix(in srgb, var(--c) 40%, transparent); }
+}
+.projet:target { animation: phare 2.6s ease-out; }
+.projet-texte { padding: 20px 20px 0; display: flex; flex-direction: column; gap: 8px; }
+.projet .etiquette { font-size: 14px; }
+.projet .etiquette-point { box-shadow: 0 0 8px currentColor; }
+.projet-nom { margin-top: 2px; font-family: var(--display); font-size: 1.5rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
+.projet-stack { display: flex; align-items: center; gap: .4rem; font-size: 14px; color: var(--muted); }
+.projet-desc { margin-top: 6px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.projet-bas { margin-top: auto; padding: 22px 20px; }
 .btn-mini { padding: .5rem 1rem; font-size: .88rem; }
+.projet .btn-mini { min-height: 42px; padding: 0 18px; font-size: 15px; }
 
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; }
 .tags li { padding: .28rem .8rem; border-radius: 999px; font-size: .85rem; font-weight: 500; color: var(--text); background: var(--night-3); box-shadow: inset 0 0 0 1px var(--line); }
@@ -1917,7 +1860,6 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 
 /* Responsive : mêmes paliers que Tailwind (sm 640, md 768, lg 1024) */
 @media (min-width: 640px) {
-  .projets { grid-template-columns: 1fr 1fr; gap: 4rem 1.75rem; }
   .faits { grid-template-columns: 1fr 1fr; }
   .competences { grid-template-columns: 1fr 1fr; }
   .langues { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
@@ -1959,17 +1901,24 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-  .projets { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4.5rem 2.5rem; }
   .passions { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .contact-tel { order: 1; grid-column: span 4; }
   .contact-texte { order: 2; grid-column: 6 / span 7; }
 }
 
+/* Projets : 2 par ligne à partir de 601 px, 4 par ligne à partir de 1121 px (comme lois-ekollo.fr) */
+@media (min-width: 601px) {
+  .projets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1121px) {
+  .projets { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .anneau, .projet:target .projet-halo { animation: none; }
+  .rise, .anneau, .projet:target { animation: none; }
   .mail-curseur { animation: none !important; }
-  .fenetre, .projet:hover .fenetre { transition: none; translate: none; }
+  .projet, .projet:hover, .projet:focus-within { transition: none; translate: none; }
   .fenetre-ecran img, .projet:hover .fenetre-ecran img { transition: none; transform: none; }
 }
 `;
