@@ -200,11 +200,39 @@ const LANGUES = [
   { nom: "Espagnol", niveau: "A2", rang: 2 },
 ];
 
-const FAITS = [
-  { titre: "Basé à Lille", texte: "Permis B et véhiculé." },
-  { titre: "Stage de 4 mois", texte: "D'avril à juillet 2027, en développement informatique." },
-  { titre: "Epitech, parcours IA & data", texte: "Bachelor Informatique, de 2025 à 2028." },
-  { titre: "Premier stage en entreprise", texte: "Développeur front-end React chez Obsidian Travel, en juin 2026." },
+// Section « Parcours » : une frise, de la plus ancienne étape à la prochaine.
+// La dernière étape (aVenir: true) s'affiche en pointillés, avec un bouton vers le contact.
+// Quand tu auras trouvé ton stage, remplace-la par une étape normale.
+const PARCOURS = [
+  {
+    date: "2025",
+    titre: "Epitech Lille",
+    role: "Bachelor Informatique, parcours IA & data",
+    texte: "Des projets en IA, en web et en cybersécurité.",
+    couleur: C.cyan,
+  },
+  {
+    date: "Mars 2026",
+    titre: "LMS Digital",
+    role: "Fondateur",
+    texte: "Mon auto-entreprise de création de sites web.",
+    couleur: C.violet,
+  },
+  {
+    date: "Juin 2026",
+    titre: "Obsidian Travel",
+    role: "Stage, développeur front-end React",
+    texte: "Mon premier stage en entreprise.",
+    couleur: C.magenta,
+  },
+  {
+    date: "Avril 2027",
+    titre: "Votre entreprise ?",
+    role: "Stage de 4 mois, d'avril à juillet",
+    texte: "Je cherche un stage en développement informatique.",
+    couleur: C.orange,
+    aVenir: true,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -292,13 +320,12 @@ const IcFlecheBas = (p) => (
     <path d="m19 12-7 7-7-7" />
   </Icone>
 );
-// Clavier de piano : trois touches blanches visibles, deux noires pleines.
+// Piano à queue (icône « piano » de Lucide).
 const IcPiano = (p) => (
   <Icone {...p}>
-    <rect x="3" y="4" width="18" height="16" rx="2" />
-    <path d="M9 13v7M15 13v7" />
-    <rect x="7" y="4" width="4" height="9" rx="1" fill="currentColor" />
-    <rect x="13" y="4" width="4" height="9" rx="1" fill="currentColor" />
+    <path d="M22 11.5A3.5 3.5 0 0 0 18.5 8a3.52 3.52 0 0 1-3.173-2A7 7 0 0 0 2 9v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z" />
+    <path d="M2 13h20" />
+    <path d="M6 13v4M10 13v4M14 13v4M18 13v4" />
   </Icone>
 );
 const IcHaltere = (p) => (
@@ -364,40 +391,6 @@ function Portrait({ className = "" }) {
         </span>
       )}
     </span>
-  );
-}
-
-// Texte qui tourne autour de la photo du haut de page : il ne passe jamais sur le visage.
-// Chaque info est précédée d'une étoile de la couleur de la marque.
-const ANNEAU = [
-  { texte: "Epitech Lille · IA & data", couleur: "var(--magenta)" },
-  { texte: "Fondateur de LMS Digital", couleur: "var(--cyan)" },
-  { texte: "Stage d'avril à juillet 2027", couleur: "var(--orange)" },
-];
-const ANNEAU_RAYON = 161; // rayon de la ligne de base du texte, dans un carré de 400
-
-function AnneauTexte() {
-  const id = "anneau" + useId().replace(/[^a-zA-Z0-9]/g, "");
-  const r = ANNEAU_RAYON;
-  // Cercle tracé dans le sens horaire depuis la gauche : les lettres pointent vers l'extérieur.
-  const chemin = `M ${200 - r},200 a ${r},${r} 0 1,1 ${2 * r},0 a ${r},${r} 0 1,1 ${-2 * r},0`;
-  return (
-    <svg className="anneau" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
-      <defs>
-        <path id={id} d={chemin} />
-      </defs>
-      <circle className="anneau-orbite" cx="200" cy="200" r="151" />
-      <text className="anneau-texte">
-        <textPath href={`#${id}`} textLength={(2 * Math.PI * r).toFixed(1)} lengthAdjust="spacing">
-          {ANNEAU.map(({ texte, couleur }) => (
-            <tspan key={texte}>
-              <tspan fill={couleur}>✦</tspan>
-              {`\u00a0\u00a0${texte.toUpperCase()}\u00a0\u00a0`}
-            </tspan>
-          ))}
-        </textPath>
-      </text>
-    </svg>
   );
 }
 
@@ -553,7 +546,6 @@ function Hero() {
         <div className="hero-photo">
           <div className="hero-photo-cadre rise">
             <span className="hero-photo-halo degrade" aria-hidden="true" />
-            <AnneauTexte />
             <Portrait className="portrait--hero" />
           </div>
         </div>
@@ -979,45 +971,51 @@ function Projets() {
 /* Autres sections                                                             */
 /* -------------------------------------------------------------------------- */
 
-function APropos() {
+function Parcours() {
   return (
-    <section id="a-propos" className="bloc">
-      <div className="wrap grille-12">
-        <div className="col-5 apropos-gauche">
-          <div className="collant">
-            <div className="apropos-identite">
-              <Portrait className="portrait--petit" />
-              <div>
-                <p className="apropos-nom">
-                  {PROFIL.prenom} {PROFIL.nom}
-                </p>
-                <p className="apropos-role">Étudiant développeur IA & web</p>
-              </div>
-            </div>
-            <h2 className="titre">Qui suis-je&nbsp;?</h2>
-          </div>
+    <section id="parcours" className="bloc">
+      <div className="wrap">
+        <div className="grille-12 entete">
+          <h2 className="titre titre-grand col-7">
+            Mon parcours,
+            <br />
+            et la suite.
+          </h2>
+          <p className="lead col-5 entete-texte">
+            Une école, une entreprise lancée, un premier stage. Prochaine étape&nbsp;: un stage de 4&nbsp;mois à
+            partir d'avril 2027.
+          </p>
         </div>
 
-        <div className="col-7">
-          <p className="lead lead--fort">
-            Je suis en 2ᵉ&nbsp;année du Bachelor Informatique d'Epitech Lille, dans le parcours IA & data. Mes projets
-            vont de l'apprentissage par renforcement à la sécurité des LLM, en passant par le développement web avec
-            React et FastAPI.
-          </p>
-          <p className="lead">
-            Je suis aussi le fondateur de LMS Digital, mon auto-entreprise de création de sites web, lancée en mars
-            2026.
-          </p>
-
-          <dl className="faits">
-            {FAITS.map((f) => (
-              <div key={f.titre}>
-                <dt>{f.titre}</dt>
-                <dd>{f.texte}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <ol className="frise">
+          {PARCOURS.map((e, i) => {
+            const suivante = PARCOURS[i + 1];
+            const classes = ["etape"];
+            if (e.aVenir) classes.push("etape--a-venir");
+            if (suivante?.aVenir) classes.push("etape--vers-suite");
+            return (
+              <li
+                key={e.titre}
+                className={classes.join(" ")}
+                style={{ "--c": e.couleur, "--c2": suivante?.couleur ?? e.couleur }}
+              >
+                <span className="etape-point" aria-hidden="true" />
+                <div className="etape-carte">
+                  <p className="etape-date">{e.date}</p>
+                  <h3 className="etape-titre">{e.titre}</h3>
+                  <p className="etape-role">{e.role}</p>
+                  <p className="etape-texte">{e.texte}</p>
+                  {e.aVenir && (
+                    <a href="#contact" className="btn btn-contour btn-petit etape-lien">
+                      <IcSend className="ic ic-4" />
+                      Me contacter
+                    </a>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
@@ -1469,7 +1467,7 @@ export default function App() {
         <main>
           <Hero />
           <Projets />
-          <APropos />
+          <Parcours />
           <Competences />
           <AuDela />
           <Contact />
@@ -1644,19 +1642,10 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .puce-projet:hover .ic { translate: 0 2px; color: var(--ink); }
 .puce-point { width: .45rem; height: .45rem; flex: none; border-radius: 50%; }
 
-/* Photo du haut de page : la photo au centre, une orbite pointillée, puis le texte qui tourne autour. */
-.hero-photo-cadre {
-  --taille: min(17rem, 76vw);
-  position: relative; isolation: isolate; width: var(--taille); aspect-ratio: 1;
-  margin: 0 0 -1rem calc(var(--taille) * -0.07);
-}
-.hero-photo-halo { position: absolute; inset: 8%; z-index: -1; border-radius: 50%; opacity: .45; filter: blur(56px); }
-.portrait--hero { position: absolute; inset: 14%; }
-.anneau { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: tourne 70s linear infinite; }
-.hero-photo-cadre:hover .anneau { animation-play-state: paused; }
-.anneau-orbite { fill: none; stroke: rgb(255 255 255 / 0.22); stroke-width: 1.4; stroke-dasharray: 0 6.5; stroke-linecap: round; }
-.anneau-texte { font-family: var(--sans); font-size: 14.5px; font-weight: 600; letter-spacing: .265em; fill: var(--text); }
-@keyframes tourne { to { rotate: 360deg; } }
+/* Photo du haut de page : la photo ronde avec son anneau dégradé, et un halo flou derrière. */
+.hero-photo-cadre { --taille: min(15rem, 68vw); position: relative; isolation: isolate; width: var(--taille); aspect-ratio: 1; }
+.hero-photo-halo { position: absolute; inset: 10%; z-index: -1; border-radius: 50%; opacity: .45; filter: blur(56px); }
+.portrait--hero { position: absolute; inset: 0; }
 .portrait-anneau { display: block; padding: 4px; border-radius: 50%; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9); }
 .portrait-anneau img, .portrait-initiales { width: 100%; aspect-ratio: 1; height: auto; border-radius: 50%; object-fit: cover; border: 6px solid var(--night); background: var(--night-2); }
 .portrait-initiales { display: grid; place-items: center; font-family: var(--display); font-size: 3.5rem; font-weight: 700; color: var(--ink); }
@@ -1730,18 +1719,41 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 .tags--grand li { padding: .45rem .95rem; font-size: .97rem; color: var(--ink); }
 
 
-/* Qui suis-je ? */
-.collant { position: static; }
-.apropos-identite { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
-.portrait--petit { width: 4.5rem; flex: none; padding: 3px; }
-.portrait--petit img { border-width: 3px; }
-.apropos-nom { font-weight: 700; color: var(--ink); font-size: 1.05rem; }
-.apropos-role { color: var(--muted); font-size: .95rem; }
-.col-7 > .lead + .lead { margin-top: 1rem; }
-.faits { margin-top: 2.5rem; display: grid; gap: 1rem; }
-.faits > div { border-radius: 1rem; padding: 1.25rem 1.4rem; background: var(--night-2); box-shadow: inset 0 0 0 1px var(--line); }
-.faits dt { font-family: var(--display); font-size: 1.02rem; font-weight: 500; line-height: 1.375; letter-spacing: -0.01em; color: var(--ink); }
-.faits dd { margin-top: .4rem; line-height: 1.6; color: var(--muted); }
+/* Parcours : frise verticale sur téléphone, horizontale à partir de 1024 px.
+   --point : hauteur du point par rapport au haut de l'étape, --ecart : espace entre deux étapes. */
+.frise { --point: 1.6rem; --ecart: 1.25rem; position: relative; isolation: isolate; margin-top: 3.5rem; display: grid; gap: var(--ecart); }
+.etape { position: relative; display: flex; flex-direction: column; padding-left: 2.25rem; }
+.etape-point {
+  position: absolute; left: 0; top: var(--point); z-index: 1; width: 1rem; height: 1rem; border-radius: 50%;
+  background: var(--c); box-shadow: 0 0 0 4px var(--night), 0 0 18px var(--c);
+}
+/* Trait qui relie le point de chaque étape à celui de la suivante, en dégradé d'une couleur à l'autre */
+.etape:not(:last-child)::before {
+  content: ""; position: absolute; z-index: 0; left: .5rem; width: 2px; translate: -50% 0;
+  top: calc(var(--point) + .5rem); bottom: calc(-1 * (var(--ecart) + var(--point) + .5rem));
+  background: linear-gradient(180deg, var(--c), var(--c2));
+}
+.etape--vers-suite:not(:last-child)::before { background: repeating-linear-gradient(180deg, var(--c2) 0 6px, transparent 6px 12px); opacity: .8; }
+.etape-carte {
+  flex: 1; padding: 1.35rem 1.4rem 1.6rem; border-radius: 1.25rem;
+  background: var(--night-2); box-shadow: inset 0 0 0 1px var(--line);
+}
+.etape-date { font-size: .88rem; font-weight: 600; color: var(--c); font-variant-numeric: tabular-nums; }
+.etape-titre { margin-top: .3rem; font-family: var(--display); font-size: 1.3rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
+.etape-role { margin-top: .45rem; font-weight: 500; line-height: 1.45; color: var(--ink); }
+.etape-texte { margin-top: .6rem; line-height: 1.6; color: var(--muted); }
+/* Prochaine étape : en pointillés, avec un point qui pulse */
+.etape--a-venir .etape-carte {
+  background: color-mix(in srgb, var(--c) 6%, transparent);
+  box-shadow: none; border: 1.5px dashed color-mix(in srgb, var(--c) 60%, transparent);
+}
+.etape--a-venir .etape-point { background: var(--night); box-shadow: inset 0 0 0 2.5px var(--c), 0 0 0 4px var(--night); }
+.etape--a-venir .etape-point::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 2px var(--c);
+  animation: pulse 2.2s ease-out infinite;
+}
+@keyframes pulse { from { opacity: .8; scale: 1; } to { opacity: 0; scale: 2.4; } }
+.etape-lien { margin-top: 1.25rem; }
 
 /* Compétences */
 .competences-titre { max-width: 48rem; }
@@ -1860,11 +1872,10 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 
 /* Responsive : mêmes paliers que Tailwind (sm 640, md 768, lg 1024) */
 @media (min-width: 640px) {
-  .faits { grid-template-columns: 1fr 1fr; }
   .competences { grid-template-columns: 1fr 1fr; }
   .langues { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   .carte { padding: .75rem 2rem; }
-  .hero-photo-cadre { --taille: 20rem; }
+  .hero-photo-cadre { --taille: 18rem; }
 }
 @media (min-width: 768px) {
   .wrap { padding-inline: 2rem; }
@@ -1892,13 +1903,20 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
   .col-6 { grid-column: span 6; }
   .col-7 { grid-column: span 7; }
   .col-8 { grid-column: span 8; }
-  .collant { position: sticky; top: 8rem; }
+  .frise { --point: 0rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .etape { padding-left: 0; padding-top: 2.25rem; }
+  .etape:not(:last-child)::before {
+    top: .5rem; bottom: auto; left: .5rem; right: calc(-1 * (var(--ecart) + .5rem));
+    width: auto; height: 2px; translate: 0 -50%;
+    background: linear-gradient(90deg, var(--c), var(--c2));
+  }
+  .etape--vers-suite:not(:last-child)::before { background: repeating-linear-gradient(90deg, var(--c2) 0 6px, transparent 6px 12px); }
   .entete { align-items: end; }
   .entete-texte { padding-bottom: .5rem; }
   .hero-grille { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem; }
   .hero-texte { grid-column: span 7; }
   .hero-photo { order: 0; grid-column: span 5; display: flex; justify-content: center; }
-  .hero-photo-cadre { --taille: min(100%, 26rem); margin: 0; }
+  .hero-photo-cadre { --taille: min(100%, 22rem); top: 1.25rem; } /* photo un peu plus basse que le texte */
   .hero-titre-grand { font-size: clamp(2.4rem, 4.4vw, 4.3rem); }
   .competences { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .passions { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -1916,7 +1934,7 @@ section[id], article[id], li[id] { scroll-margin-top: 5.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .anneau, .projet:target { animation: none; }
+  .rise, .projet:target, .etape--a-venir .etape-point::after { animation: none; }
   .mail-curseur { animation: none !important; }
   .projet, .projet:hover, .projet:focus-within { transition: none; translate: none; }
   .fenetre-ecran img, .projet:hover .fenetre-ecran img { transition: none; transform: none; }
